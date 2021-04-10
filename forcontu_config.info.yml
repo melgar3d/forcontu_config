@@ -1,0 +1,5 @@
+name: Forcontu Config
+type: module
+description: 'Módulo prácticas configuración'
+package: Forcontu
+core_version_requirement: ^9

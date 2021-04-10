@@ -1,0 +1,21 @@
+forcontu_config.index:
+  path: '/forcontu/config/index'
+  defaults:
+    _controller: '\Drupal\forcontu_config\Controller\ForcontuConfigController::index'
+    _title: 'Index Forcontu Config'
+  requirements:
+    _permission: 'access content'
+forcontu_config.admin_forcontu_config:
+  path: '/admin/forcontu_config'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Forcontu Config'
+  requirements:
+    _access: 'TRUE'
+forcontu_config.admin_forcontu_config_index:
+  path: '/admin/forcontu_config/index'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Forcontu Config Index'
+  requirements:
+    _access: 'TRUE'

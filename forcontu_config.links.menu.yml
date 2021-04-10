@@ -1,0 +1,12 @@
+forcontu_config.admin_forcontu_config:
+  title: 'Forcontu Config'
+  parent: system.admin
+  route_name: forcontu_config.admin_forcontu_config
+  description: 'Página principal de Forcontu Config'
+  weight: 12
+forcontu_config.admin_forcontu_config_index:
+  title: 'Forcontu Config Index'
+  parent: forcontu_config.admin_forcontu_config
+  route_name: forcontu_config.index
+  description: 'Página principal de Forcontu Config Index'
+

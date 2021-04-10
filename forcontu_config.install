@@ -1,0 +1,44 @@
+<?php
+
+
+/**
+ * @file
+ * Contains install and update functions for Forcontu Config.
+ */
+
+function forcontu_config_install(){
+
+    $last_date_cron = \Drupal::state()->get('system.cron_last');
+    $site_mail = \Drupal::config('system.site')->get('mail');
+    $site_name = \Drupal::config('system.site')->get('name');
+    $site_country = \Drupal::config('system.date');
+
+
+    \Drupal::service('config.factory')->getEditable('forcontu_config.settings')
+      ->set('newsletter.default_from_email', $site_mail)
+      ->set('newsletter.subject', $site_name)
+      ->set('newsletter.periodicity', 'monthly')
+      ->set('newsletter.news_number', 5)
+      ->set('newsletter.country', $site_country->get('country.default'))
+      ->save();
+
+    $current_date = (int)microtime(true);
+    $cron_duration = $current_date - $last_date_cron;
+    
+    $performance = \Drupal::service('config.factory')->getEditable('system.performance');
+    $performance->set('css.preprocess', false);
+    $performance->set('js.preprocess', false);
+    $performance->save();
+
+    if($cron_duration < 300){
+        \Drupal::state()->set('forcontu_config.cron_duration', $cron_duration);
+    }else{
+        \Drupal::state()->set('forcontu_config.cron_duration', $cron_duration);
+        $cron = \Drupal::service('cron');
+        $cron->run();
+    }
+}
+
+function forcontu_config_uninstall(){
+    \Drupal::state()->delete('forcontu_config.cron_duration');
+}
